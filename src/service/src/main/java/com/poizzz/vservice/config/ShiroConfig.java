@@ -17,12 +17,14 @@ import org.apache.shiro.spring.web.config.ShiroFilterChainDefinition;
 import org.apache.shiro.web.mgt.DefaultWebSessionStorageEvaluator;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import java.util.Arrays;
 import java.util.Map;
 
+@Configuration
 public class ShiroConfig {
     @Bean
     public FilterRegistrationBean<Filter> filterRegistrationBean(SecurityManager securityManager,

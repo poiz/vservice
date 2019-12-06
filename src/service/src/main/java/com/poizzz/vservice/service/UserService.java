@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserService {
@@ -27,8 +28,8 @@ public class UserService {
         String salt = "12345";//JwtUtils.generateSalt();
         /**
          * @todo 将salt保存到数据库或者缓存中
-         * redisTemplate.opsForValue().set("token:"+username, salt, 3600, TimeUnit.SECONDS);
-         */
+         *
+         */redisTemplate.opsForValue().set("token:" + username, salt, 3600, TimeUnit.SECONDS);
         return JwtUtils.sign(username, salt, 3600); //生成jwt token，设置过期时间为1小时
     }
 
@@ -41,8 +42,8 @@ public class UserService {
         String salt = "12345";
         /**
          * @todo 从数据库或者缓存中取出jwt token生成时用的salt
-         * salt = redisTemplate.opsForValue().get("token:"+username);
-         */
+         *
+         */salt = redisTemplate.opsForValue().get("token:" + username);
         UserDto user = getUserInfo(username);
         user.setSalt(salt);
         return user;
@@ -57,8 +58,8 @@ public class UserService {
     public void deleteLoginInfo(String username) {
         /**
          * @todo 删除数据库或者缓存中保存的salt
-         * redisTemplate.delete("token:"+username);
-         */
+         *
+         */redisTemplate.delete("token:" + username);
 
     }
 

@@ -44,7 +44,7 @@ public class JWTShiroRealm extends AuthorizingRealm {
         if (user == null)
             throw new AuthenticationException("token过期，请重新登录");
 
-        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUsername(),
+        SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user,
                                                                                    user.getSalt(),
                                                                                    "jwtRealm");
 
